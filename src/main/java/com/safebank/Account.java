@@ -2,6 +2,29 @@ package com.safebank;
 
 public class Account {
     private double balance;
+    private String accountNumber;
+    public enum AccountType {
+        CHECKING,
+        SAVINGS
+    };
+
+    private final AccountType accountType;
+
+    public Account() {
+        this.balance = 0.0;
+        this.accountNumber = generateAccountNumber(); // if applicable
+        this.accountType = AccountType.CHECKING; // or whatever default you want
+    }
+
+    private String generateAccountNumber() {
+        return "ACC" + System.currentTimeMillis(); // simple placeholder
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public String getAccountNumber() {}
 
     public double getBalance() {
         return balance;

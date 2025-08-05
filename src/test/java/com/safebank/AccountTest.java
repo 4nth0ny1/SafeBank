@@ -99,4 +99,16 @@ class AccountTest {
         acc.withdraw(50.0);
         assertEquals(0.0, acc.getBalance(), 0.0001);
     }
+
+    @Test
+    void accountHasNonNullAccountNumber() {
+        Account acc = new Account();
+        assertNotNull(acc.getAccountNumber(), "Account number should not be null");
+    }
+
+    @Test
+    void accountHasValidAccountType() {
+        Account acc = new Account();
+        assertNotNull(acc.getAccountType(), "Account type should not be null");
+    }
 }
