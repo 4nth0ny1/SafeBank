@@ -1,6 +1,9 @@
 package com.safebank;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -117,5 +120,37 @@ class AccountTest {
         Account acc = new Account();
         acc.setAccountType(Account.AccountType.SAVINGS);
         assertEquals(Account.AccountType.SAVINGS, acc.getAccountType());
+    }
+
+    @Test
+    void accountStartsWithAnEmptyTransactionLog() {
+        Account acc = new Account();
+        assertNotNull(acc.getTransactionLog(), "Transaction log should not be null");
+        assertTrue(acc.getTransactionLog().isEmpty(), "Transaction log should be empty on new account");
+    }
+
+    @Test
+    void depositAddsTransactionToLog() {
+        Account acc = new Account();
+        acc.deposit(100.0);
+        List<Transaction> log = acc.getTransactionLog();
+        assertEquals(1, log.size());
+        Transaction t = log.get(0);
+        assertEquals(Transaction.TransactionType.DEPOSIT, t.getType());
+        assertEquals(100.0, t.getAmount(), 0.0001);
+        assertEquals(100.0, t.getResultingBalance(), 0.0001);
+    }
+    
+    @Test
+    void withdrawAddsTransactionToLog() {
+        Account acc = new Account();
+        acc.deposit(100.0);
+        acc.withdraw(50.0);
+        List<Transaction> log = acc.getTransactionLog();
+        assertEquals(2, log.size());
+        Transaction t = log.get(1);
+        assertEquals(Transaction.TransactionType.WITHDRAW, t.getType());
+        assertEquals(50.0, t.getAmount(), 0.0001);
+        assertEquals(50.0, t.getResultingBalance(), 0.0001);
     }
 }
