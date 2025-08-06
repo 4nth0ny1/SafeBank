@@ -111,4 +111,11 @@ class AccountTest {
         Account acc = new Account();
         assertNotNull(acc.getAccountType(), "Account type should not be null");
     }
+
+    @Test
+    void accountStoresAndReturnsCorrectAccountType() {
+        Account acc = new Account();
+        acc.setAccountType(Account.AccountType.SAVINGS);
+        assertEquals(Account.AccountType.SAVINGS, acc.getAccountType());
+    }
 }

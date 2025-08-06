@@ -8,7 +8,7 @@ public class Account {
         SAVINGS
     };
 
-    private final AccountType accountType;
+    private AccountType accountType;
 
     public Account() {
         this.balance = 0.0;
@@ -24,7 +24,13 @@ public class Account {
         return accountType;
     }
 
-    public String getAccountNumber() {}
+    public void setAccountType(AccountType type) {
+        this.accountType = type;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
     public double getBalance() {
         return balance;
